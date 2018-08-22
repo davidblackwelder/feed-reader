@@ -74,19 +74,16 @@ $(function() {
     describe('Initial Entries', function() {
 
         beforeEach(function(done) {
-            loadFeed(0);
-            done();
+            loadFeed(0, done);
         });
 
         /* Ensures when the loadFeed function is called and completes its work,
          * there is at least
          * a single .entry element within the .feed container.
          */
-        it('has at least a single entry within the feed container', function(done) {
+        it('has at least a single entry within the feed container', function() {
             const feed = document.querySelector('.feed');
-            expect(feed.children).not.toBeNull();
-            expect(feed.children).toBeDefined();
-            done();
+            expect(feed.children.length).not.toEqual(0);
         });
     });
 
