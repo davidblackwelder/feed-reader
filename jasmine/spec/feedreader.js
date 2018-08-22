@@ -77,9 +77,11 @@ $(function() {
          it('has menu change visibility when the menu icon is clicked', function() {
             const menuIcon = document.querySelector('.menu-icon-link');
 
+            // first click should show menu
             menuIcon.click();
             expect(body.classList.contains('menu-hidden')).toBe(false);
 
+            // second click should hide menu
             menuIcon.click();
             expect(body.classList.contains('menu-hidden')).toBe(true);
          });
@@ -87,13 +89,20 @@ $(function() {
 
     /* TODO: Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function() {
+        const feed = document.querySelector('.feed');
 
+        beforeEach(function(done) {
+            loadFeed(0, done);
+        });
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+        it('has at least a single entry within the feed container', function() {
+            expect(feed.children.length).not.toBe(0);
+        });
     });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
