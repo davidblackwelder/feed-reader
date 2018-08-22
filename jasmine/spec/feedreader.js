@@ -89,28 +89,50 @@ $(function() {
 
     /* TODO: Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function() {
-        const feed = document.querySelector('.feed');
 
         beforeEach(function(done) {
-            loadFeed(0, done);
+            loadFeed(0);
+            done();
         });
+
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-        it('has at least a single entry within the feed container', function() {
-            expect(feed.children.length).not.toBe(0);
+        it('has at least a single entry within the feed container', function(done) {
+            const feed = document.querySelector('.feed');
+            expect(feed.children).not.toBeNull();
+            expect(feed.children).toBeDefined();
+            done();
         });
     });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
+        let firstLoadFeed;
+        let secondLoadFeed;
+
+        beforeEach(function(done) {
+            loadFeed(0);
+            firstLoadFeed = document.querySelector('.header-title').innerText;
+            done();
+        });
+
+        afterEach(function(done) {
+            loadFeed(1);
+            secondLoadFeed = document.querySelector('.header-title').innerText;
+            done();
+        });
 
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+        it('has content change when a new feed is loaded by the loadFeed function', function(done) {
+            expect(firstLoadFeed).not.toEqual(secondLoadFeed);
+            done();
+        });
     });
 }());
