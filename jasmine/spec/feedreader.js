@@ -112,18 +112,15 @@ $(function() {
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
         let firstLoadFeed;
-        let secondLoadFeed;
 
         beforeEach(function(done) {
-            loadFeed(0);
-            firstLoadFeed = document.querySelector('.header-title').innerText;
-            done();
-        });
+            loadFeed(0, function() {
+                firstLoadFeed = document.querySelector('.feed').innerText;
 
-        afterEach(function(done) {
-            loadFeed(1);
-            secondLoadFeed = document.querySelector('.header-title').innerText;
-            done();
+                loadFeed(1, function() {
+                    done();
+                });
+            });
         });
 
         /* TODO: Write a test that ensures when a new feed is loaded
@@ -131,6 +128,7 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */
         it('has content change when a new feed is loaded by the loadFeed function', function(done) {
+            let secondLoadFeed = document.querySelector('.feed').innerText;
             expect(firstLoadFeed).not.toEqual(secondLoadFeed);
             done();
         });
